@@ -1,0 +1,139 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" >
+  <!-- main -->
+  <div class="col">
+    <style>
+         
+    </style>
+    <!-- main header -->
+    <!-- <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">Dashboard</h1>
+          <small class="text-muted">Selamat Datang</small>
+        </div>        
+      </div>
+    </div> -->
+    <!-- / main header -->
+    <div class="wrapper-md" ng-controller="Dashboard">
+      <!-- stats -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row row-sm text-center">
+            
+            <div class="col-xs-6 col-md-2">
+              <a ui-sref="app.blog.semua_blog" class="block panel padder-v bg-info item" style="background-color: #F8C10D;padding: 30px">
+                <span class="text-white font-thin h4 block"><i class="glyphicon glyphicon-pencil icon "></i></span>
+                
+                <span class="text-white font-thin h3 block">Blog</span>
+              </a>
+            </div>
+
+            <div class="col-xs-6 col-md-2">
+              <a ui-sref="app.produk.semua_produk" class="block panel item" style="background-color: #27C24C;padding: 30px">
+                <span class="text-white font-thin h4 block"><i class="glyphicon glyphicon-briefcase icon "></i></span>
+                
+                <span class="text-white font-thin h3 block">Tour</span>
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-2">
+              <a ui-sref="app.page.semua_page" class="block panel padder-v bg-info item" style="background-color: #377EF0;padding: 30px">
+                <!-- <span class="text-white font-thin h4 block"><i class="fa fa-image icon "></i></span> -->
+                <span class="text-white font-thin h4 block"><i class="icon icon-layers "></i></span>
+                
+                <span class="text-white font-thin h3 block">Page</span>
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-2">
+              <a ui-sref="app.galeri.semua_galeri" class="block panel padder-v item" style="background-color: #FF751C;padding: 30px">
+                <span class="text-white font-thin h4 block"><i class="icon icon-picture  well-lg"></i></span>
+                
+                <span class="text-white font-thin h3 block">Galeri</span>
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-2">
+              <a ui-sref="app.setting.semua_slider" class="block panel padder-v item" style="background-color: #ED4D4F;padding: 30px">
+                <span class="text-white font-thin h4 block"><i class="glyphicon glyphicon-film "></i></span>
+                
+                <span class="text-white font-thin h3 block">Slider</span>
+              </a>
+            </div>            
+            <div class="col-xs-6 col-md-2">
+              <a ui-sref="app.setting.profile_website" >
+                <div class="panel padder-v item" style="padding: 30px">
+                  <span class="text-info font-thin h4 block"><i class="icon icon-settings "></i></span>
+
+                  <div class="text-info font-thin h3 block">Setting</div>                                            
+                </div>
+              </a>
+            </div>            
+            
+          </div>
+        </div>
+
+        <div class="col-md-6">          
+          <div class="panel panel-default">
+            <div class="panel-heading font-bold" >
+              <i class="fa fa-bullhorn"></i>
+              All Booking
+            </div>
+            <div class="panel-body b-b b-light">
+              Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+            </div>
+            <div>
+              <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="10">
+                
+                <script type="text/ng-template" id="myModalContent.html">
+                  <div ng-include="'tpl/front/booking_modal.html'"></div>
+                </script>
+                <script type="text/ng-template" id="hapus.html">
+                  <div ng-include="'tpl/front/modal.html'"></div>
+                </script>
+
+                <thead>
+                  <tr>
+                      <th>No</th>              
+                      <th >
+                          nama
+                      </th>                      
+                      <th>
+                          Email
+                      </th>
+                      <th>
+                          Tanggal
+                      </th>
+                      <th>
+                          Lihat
+                      </th>                      
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="row in dataset">              
+                      <td>{{$index+1}}</td>                     
+                      <td><a class="text-primary" ng-click="open({{row.id}})">{{row.nama}}</a></td>     
+                      <td>{{row.email}}</td>              
+                      <td>{{row.tanggal}}</td>
+                      <td><button ng-click="open({{row.id}})" class="btn btn-rounded btn btn-icon btn-default"><i class="fa fa-eye"></i></button></td>                      
+                  </tr>
+                  
+                </tbody>
+                <tfoot class="hide-if-no-paging">
+                  <tr>
+                      <td colspan="5" class="text-center">
+                          <ul class="pagination"></ul>
+                      </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>   
+        </div>
+        
+                
+      </div>
+      <!-- / stats -->
+    </div>
+
+  </div>
+  <!-- / main -->
+
+</div>

@@ -1,0 +1,62 @@
+
+<div class="wrapper-md" ng-controller="SemuaKontak">
+  <button ui-sref="app.setting.kontak_baru" class="btn m-b-xs btn-info btn-addon"><i class="fa fa-plus"></i>Tambah Kontak</button>
+
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold" >
+      <i class="fa fa-book"></i>
+      Semua Kontak
+    </div>
+    <div class="panel-body b-b b-light">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+    </div>
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="10">
+        
+        <script type="text/ng-template" id="myModalContent.html">
+          <div ng-include="'tpl/front/modal.html'"></div>
+        </script>
+
+        <thead>
+          <tr>
+              <th>No</th>              
+              <th >
+                  Action
+              </th>
+              <th data-toggle="true">
+                  Judul
+              </th>                          
+              <th data-hide="phone">
+                  Icon
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in dataset | orderBy:'-id'">              
+              <td>{{$index+1}}</td>
+              <td >
+                <div class="btn-group dropdown" dropdown="">
+                  <button class="btn m-b-xs btn-success btn-addon" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gears"></i> <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#/app/setting/kontak_rubah/{{row.id}}"><i class="fa fa-edit"></i> Rubah</a></li>
+                    <li class="divider"></li>                    
+                    <li><a ng-click="delete({{row.id}})"><i class="fa fa-trash"></i> Hapus</a></li>                          
+                  </ul>
+                </div>
+              </td>
+              <td>{{row.judul}}</td>                               
+              <td><img ng-src="{{gambar}}{{row.gambar}}" style="max-width: 100px"></td>
+          </tr>
+          
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

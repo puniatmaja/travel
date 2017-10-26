@@ -1,0 +1,56 @@
+<div class="wrapper-md" ng-controller="KategoriBlogRubah">  
+    <form  ng-submit="save()" enctype="multipart/form-data" >
+    <div class="col-sm-8">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"><i class="fa fa-pencil"></i> Kategori Rubah</div>
+        <div class="panel-body">
+          
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-paragraph"></i></span>              
+              <input type="text" class="form-control" placeholder="judul" ng-model="row.judul" required="">
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-link"></i></span>
+              <input type="text" class="form-control" placeholder="slug" ng-model="row.slug">
+            </div>                  
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-bookmark"></i></span>
+              <select name="kategori" class="form-control m-b" ng-model="row.id_parent">
+                <option value="0" ng-selected="true">--  Kategori Terkait --</option>
+                <option ng-repeat="key in kategori" value="{{key.id}}" >{{key.judul}}</option>                                
+              </select>
+            </div>
+          
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"><i class="fa fa-rocket"></i> SEO</div>
+        <div class="panel-body">
+          
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+              <input type="text" class="form-control" placeholder="judul SEO" ng-model="row.seo_judul">
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="icon icon-key"></i></span>
+              <input type="text" class="form-control" placeholder="Kata Kunci" ng-model="row.seo_kata_kunci">
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-quote-right"></i></span>              
+              <textarea name="deskripsi" class="form-control" placeholder="Deskripsi SEO" ng-model="row.seo_deskripsi"></textarea>
+            </div>   
+            <input type="hidden" ng-model="row.id" >
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <button class="btn btn-success btn-addon btn-md " type="submit" id="submit"><i id="load" class="glyphicon glyphicon-floppy-saved"></i>Simpan</button>
+            <button class="btn btn-warning btn-addon btn-md" ui-sref="app.blog.kategori">Batal</button>
+        </div>
+      </div>  
+
+    </div>
+
+    </form>
+  </div>
+
+  
+</div>

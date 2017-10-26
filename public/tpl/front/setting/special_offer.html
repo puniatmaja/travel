@@ -1,0 +1,129 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Special Offer</h1> 
+</div>
+<div class="wrapper-md" ng-controller="SpecialOffer">
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold" >
+          <i class="fa fa-star"></i>
+          Special Offer
+        </div>
+        <div class="panel-body b-b b-light">
+          Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+        </div>
+        <div>
+          <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="10">
+            
+            <script type="text/ng-template" id="myModalContent.html">
+              <div ng-include="'tpl/front/modal.html'"></div>
+            </script>
+            
+             
+             <div class="col-xs-12 list-group m-t" ng-if="row.name === 'Special'">
+                <div ng-repeat="item in special" class="list-group-item">
+                  <div class="checkbox">
+                    
+                      <a class="btn btn-danger btn-sm" ng-click="delete({{item.id}})"><i class="fa fa-trash"></i></a>                      
+                      <i></i>            
+                      {{item.judul}}
+                    
+                  </div>
+                </div>
+              </div>
+
+            <thead>
+              <tr>
+                  <th>No</th>              
+                  <th >
+                      Judul
+                  </th>                      
+                  <th>
+                      Hapus
+                  </th>          
+                  <th>
+                      Status
+                  </th>                  
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in special">              
+                  <td>{{$index+1}}</td>                     
+                  <td ng-if="item.page_jud === null">{{item.product_jud}}</td>     
+                  <td ng-if="item.product_jud === null">{{item.page_jud}}</td>
+                  <td><a class="btn btn-danger btn-sm" ng-click="delete({{item.id}})"><i class="fa fa-trash"></i></a></td>                      
+                  <td>
+                    <span class="label bg-primary" title="product" ng-if="item.page_jud === null">Product</span>
+                    <span class="label bg-primary" title="page" ng-if="item.product_jud === null ">Page</span>
+                  </td>          
+              </tr>
+              
+            </tbody>
+            <tfoot class="hide-if-no-paging">
+              <tr>
+                  <td colspan="5" class="text-center">
+                      <ul class="pagination"></ul>
+                  </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+              
+    </div>
+    <div class="col-md-6">
+      
+      
+      <accordion close-others="oneAtATime">
+          <br>
+          <h4 class="m-t-xs">Kolom Pilihan</h4>
+          <accordion-group is-open="status.page" class="b-info">
+              <accordion-heading>
+                  Pilih Page<i class="pull-right fa fa-angle-right" ng-class="{'fa-angle-down': status.page, 'fa-angle-right': !status.page}"></i>
+              </accordion-heading>
+              <form  ng-submit="klik_page()" enctype="multipart/form-data" >
+                <div class="list-group m-t" ">
+                  
+                  <div class="list-group-item" ng-repeat="row in page">
+                    <div class="radio">
+                      <label class="i-checks">
+                        <input type="radio" ng-model="pages.id" name="a" value="{{row.id}}">
+                        <i></i>
+                        {{row.judul}}
+                      </label>
+                    </div>                                           
+                  </div>
+                  
+                </div>
+                <button class="btn m-b-xs btn-sm btn-primary btn-addon" type="sumbit"><i class="fa fa-plus"></i>Tambah</button>
+              </form>
+          </accordion-group>
+
+          <accordion-group ng-repeat="key in list_kategori"  is-open="key.slug" class="b-info" >
+              <accordion-heading>
+                  {{key.name}}<i class="pull-right fa fa-angle-right" ng-class="{'fa-angle-down': key.slug, 'fa-angle-right': !key.slug}"></i>
+              </accordion-heading>
+              <form  ng-submit="spesial(key.id)" enctype="multipart/form-data" >
+                <div class="list-group m-t" >
+                  
+                  <div class="list-group-item" ng-repeat="row in key.data">
+                    <div class="checkbox">
+                      <label class="i-checks">                        
+                        <input type="checkbox" ng-model="pro.text[key.id][row.id]" ng-true-value="{{row.id}}">
+                        <i></i>
+                        {{row.judul}}
+                      </label>
+                    </div>                                           
+                  </div>
+                  
+                </div>
+                <button class="btn m-b-xs btn-sm btn-primary btn-addon" type="sumbit"><i class="fa fa-plus"></i>Tambah</button>
+              </form>
+          </accordion-group>
+
+        </accordion>                
+             
+    </div>
+  </div>
+</div>

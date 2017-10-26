@@ -1,0 +1,66 @@
+.pagination{
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination > li {
+    display: inline;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #38AA4B;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #fff;
+}.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #38AA4B;
+    border-color: #428bca;
+}
+/*info*/
+/*putih : fff*/
+/*grey : bbb*/
+/*white grey :f1f1f1*/
+/*black grey :616161*/
+
+/*navigasi*/
+table{
+	 border: 1px solid #ccc;
+   padding:1px;
+}
+ th, td {
+   border: 1px solid #ccc;
+   padding:5px;
+}
+a{color:#56B865}
+a.link{color:#000}
+li.nav a {color: #fff;}
+li.nav:hover a {background: #82C98D;}
+li.nav:hover ul.nav a {background: #56B865;color: #fff;}
+li.nav:hover ul.nav a:hover {background: #82C98D;color: #fff;}
+/*serach*/
+#search {background: #fff;color: #63717f;}
+/*accordion*/
+.tab {color: #000;}
+label {background: #82C98D;}
+.tab-content {background: #E6E6E6;color: #000}
+/*main*/
+
+
+/*background*/
+.w3-white,.w3-hover-white:hover{color:#272822 !important;background-color:#fff!important}
+.w3-grey,.w3-hover-grey:hover,.w3-gray,.w3-hover-gray:hover{color:#fff!important;background-color:#38AA4B!important}
+.w3-light-grey,.w3-hover-light-grey:hover,.w3-light-gray,.w3-hover-light-gray:hover{color:#fff!important;background-color:#38AA4B!important}
+.w3-dark-grey,.w3-hover-dark-grey:hover,.w3-dark-gray,.w3-hover-dark-gray:hover{color:#fff!important;background-color:#56B865!important}
+.w3-black,.w3-hover-black:hover{color:#fff!important;background-color:#38AA4B!important}
+/*text*/
+.w3-text-white,.w3-hover-text-white:hover{color:#fff!important}
+.w3-text-black,.w3-hover-text-black:hover{color:#000!important}
+.w3-text-grey,.w3-hover-text-grey:hover,.w3-text-gray,.w3-hover-text-gray:hover{color:#757575!important}

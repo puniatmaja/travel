@@ -1,0 +1,165 @@
+<div class="wrapper-md" ng-controller="Produk">
+  <form  ng-submit="save()" enctype="multipart/form-data" >
+    <input type="hidden" ng-model="form.id" >
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"><i class="glyphicon glyphicon-briefcase"></i> Paket Tour Baru</div>
+        <div class="panel-body">
+          
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-paragraph"></i></span>
+              <input type="text" class="form-control" placeholder="judul" name="judul" ng-model="form.judul" required="" ng-blur="save_up()">
+            </div>
+            <strong>Deskripsi:</strong>
+            <br>
+            <br>
+            <textarea ui-tinymce="tinymceOptions" ng-model="form.deskripsi" ng-blur="save_up()"></textarea>
+          
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"><i class="fa fa-rocket"></i> SEO</div>
+        <div class="panel-body">
+            
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+              <input type="text" class="form-control" placeholder="judul SEO" ng-model="form.seo_judul" ng-blur="save_up()">
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="icon icon-key"></i></span>
+              <input type="text" class="form-control" placeholder="Kata Kunci" ng-model="form.seo_kata_kunci" ng-blur="save_up()">
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-quote-right"></i></span>              
+              <textarea name="deskripsi" class="form-control" placeholder="Deskripsi SEO" ng-model="form.seo_deskripsi" ng-blur="save_up()"></textarea>
+            </div>  
+
+          
+        </div>
+      </div>
+      <div class="hbox hbox-auto-xs hbox-auto-sm"  nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">      
+        <div class="panel panel-default">
+          <div class="panel-heading font-bold">
+            Upload Gambar 
+          </div>
+          
+          <div class="wrapper-md bg-light dk b-b">
+            <span class="pull-right m-t-xs">Queue length: <b class="badge bg-info">{{ uploader.queue.length }}</b></span>          
+            <div class="form-group">                
+              <div class="col-md-4">
+                <input type="file" nv-file-select="" uploader="uploader" multiple  />   
+              </div>  
+              <br>
+            </div>
+          </div>
+          <div class="wrapper-md">
+            <table class="table bg-white-only b-a">
+                <thead>
+                    <tr>
+                        <th width="50%">Name</th>
+                        <th ng-show="uploader.isHTML5">Size</th>
+                        <th ng-show="uploader.isHTML5">Progress</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in uploader.queue">
+                        <td>
+                          <strong>{{ item.file.name }}</strong>                          
+                        </td>
+                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                        <td ng-show="uploader.isHTML5">
+                            <div class="progress progress-sm m-b-none m-t-xs">
+                                <div class="progress-bar bg-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span ng-show="item.isSuccess" class="text-success"><i class="glyphicon glyphicon-ok"></i></span>
+                            <span ng-show="item.isCancel" class="text-warning"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                            <span ng-show="item.isError" class="text-danger"><i class="glyphicon glyphicon-remove"></i></span>
+                        </td>
+                        <td nowrap>
+                            <button type="button" class="btn btn-default btn-xs" ng-click="item.remove()">
+                                Remove
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+              <div>
+                <p>Progres:</p>
+                <div class="progress bg-light dker" style="">
+                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-addon btn-success" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                <i class="fa fa-arrow-circle-o-up"></i> Upload all
+              </button>            
+              <button type="button" class="btn btn-addon btn-danger" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                  <i class="fa fa-trash-o"></i> Remove all
+              </button>            
+            </div>
+          </div>
+                  
+          <div class="wrapper-md">
+            <div class="row">              
+              <div class="col-sm-4" ng-repeat="row in album">
+                <div class="inline bg-white wrapper-sm b-a">                  
+                  <div class="radio">
+                    <label class="i-checks">
+                      <input type="radio" name="a" value="{{row.gambar}}" ng-model="form.gambar" >
+                      <i></i>
+                      Gambar Utama
+                    </label>
+                    <a class="btn btn-rounded btn-sm btn-icon btn-danger pull-right" ng-click="delete({{row.id}})"><i class="fa fa-trash"></i></a>
+                  </div>
+                  <div class="bg-light">
+                    <img ng-src="{{path}}{{row.gambar}}" style="max-width: 100%" />                    
+                  </div>
+                </div>
+              </div>              
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Simpan</div>
+        <div class="panel-body">                
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-bookmark"></i></span>
+              <select name="kategori" class="form-control m-b" required="" ng-model="form.id_kategori" ng-blur="save_up()">
+                <option value="" ng-selected="true">--  Kategori  --</option>
+                <option ng-repeat="key in kategori" value="{{key.id}}" >{{key.judul}}</option>
+              </select>
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+              <tags-input ng-model="form.tag" placeholder="Masukan Tag"></tags-input>
+              <!-- <input type="text" class="form-control " placeholder="Tag" name="tag" ng-model="form.tag"> -->
+              
+            </div>
+            <div class="checkbox">
+              <label class="i-checks">
+                <input type="checkbox" value="1" ng-model="form.status">
+                <i></i>
+                Terbitkan
+              </label>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <button class="btn btn-success btn-addon btn-md" type="submit" id="submit"><i class="glyphicon glyphicon-floppy-saved" id="load"></i>Simpan</button>
+            <button class="btn btn-warning btn-addon btn-md" ui-sref="app.produk.semua_produk">Batal</button>         
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

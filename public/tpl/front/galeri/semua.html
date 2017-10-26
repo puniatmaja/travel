@@ -1,0 +1,127 @@
+ <div class="wrapper-md" ng-controller="Semua_Galeri">    
+  <div class="hbox hbox-auto-xs hbox-auto-sm"  nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">    
+  
+    <div class="panel panel-default">
+      <div class="panel-heading font-bold">
+        <i class="fa fa-image"></i>
+        Upload Galeri 
+      </div>  
+      
+        <div class="wrapper-md bg-light dk b-b">
+          <span class="pull-right m-t-xs">Queue length: <b class="badge bg-info">{{ uploader.queue.length }}</b></span>          
+          <div class="form-group">
+            <div class="col-md-4">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-bookmark"></i></span>
+                <select name="kategori" class="form-control m-b" required="" ng-model="form.kategori">                  
+                  <option value="" ng-selected="true">-- Pilih Kategori --</option>}                  
+                  <option ng-repeat="row in kategori" value="{{row.id}}" >{{row.judul}}</option>
+                </select>
+              </div>
+            </div>                
+            <div class="col-md-4">
+              <input type="file" nv-file-select="" uploader="uploader" multiple  />   
+            </div>  
+            <br>
+          </div>
+        </div>
+        <div class="wrapper-md">
+          <table class="table bg-white-only b-a">
+              <thead>
+                  <tr>
+                      <th width="50%">Name</th>
+                      <th ng-show="uploader.isHTML5">Size</th>
+                      <th ng-show="uploader.isHTML5">Progress</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="item in uploader.queue">
+                      <td>
+                        <strong>{{ item.file.name }}</strong>                      
+                      </td>
+                      <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                      <td ng-show="uploader.isHTML5">
+                          <div class="progress progress-sm m-b-none m-t-xs">
+                              <div class="progress-bar bg-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                          </div>
+                      </td>
+                      <td class="text-center">
+                          <span ng-show="item.isSuccess" class="text-success"><i class="glyphicon glyphicon-ok"></i></span>
+                          <span ng-show="item.isCancel" class="text-warning"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                          <span ng-show="item.isError" class="text-danger"><i class="glyphicon glyphicon-remove"></i></span>
+                      </td>
+                      <td nowrap>
+                          <button type="button" class="btn btn-default btn-xs" ng-click="item.remove()">
+                              Remove
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <div>
+            <div>
+              <p>Progres:</p>
+              <div class="progress bg-light dker" style="">
+                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-addon btn-success" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+              <i class="fa fa-arrow-circle-o-up"></i> Upload all
+            </button>            
+            <button type="button" class="btn btn-addon btn-danger" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                <i class="fa fa-trash-o"></i> Remove all
+            </button>            
+          </div>
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold" >
+      Galeri
+    </div>
+    <div class="panel-body b-b b-light">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+    </div>
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="10">
+        
+        <script type="text/ng-template" id="myModalContent.html">
+          <div ng-include="'tpl/front/modal.html'"></div>
+        </script>
+
+        <thead>
+          <tr>
+              <th>X</th>              
+              <th data-toggle="true">
+                  Judul
+              </th>
+              <th>Kategori</th>       
+              <th>Gambar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in dataset | orderBy:'-id'">              
+              <td><button class="btn btn-sm btn-icon btn-danger" ng-click="delete({{row.id}})"><i class="fa fa-trash-o"></i></button></td>
+              <!-- <td><label class="i-checks m-b-none"><input type="checkbox" ng-model="form[row.id]" ng-true-value="{{row.id}}"><i></i></label></td>               -->
+              <td>{{row.judul}} <a class="btn btn-rounded btn btn-icon btn-default" href="#/app/galeri/rubah/{{row.id}}"><i class="fa fa-pencil"></i></a></td>                   
+              <td>{{row.kategori}}</td>
+              <td><img ng-src="{{path}}{{row.gambar}}" style="width: 100px"></td>            
+          </tr>
+          
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+</div>

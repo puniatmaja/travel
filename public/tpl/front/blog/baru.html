@@ -1,0 +1,89 @@
+<div class="wrapper-md" ng-controller="Blog">  
+  <form  ng-submit="save()" enctype="multipart/form-data" >
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"><i class="fa fa-pencil"></i> Blog Baru</div>
+        <div class="panel-body">
+          
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-paragraph"></i></span>
+              <input type="text" class="form-control" placeholder="judul" name="judul" ng-model="form.judul" required>
+            </div>
+            <strong>Deskripsi:</strong>
+            <br>
+            
+            <br>            
+              <textarea ui-tinymce="tinymceOptions" ng-model="form.deskripsi"></textarea>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"><i class="fa fa-rocket"></i> SEO</div>
+        <div class="panel-body">
+          
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+              <input type="text" class="form-control" placeholder="judul SEO" ng-model="form.seo_judul">
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="icon icon-key"></i></span>
+              <input type="text" class="form-control" placeholder="Kata Kunci" ng-model="form.seo_kata_kunci">
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-quote-right"></i></span>              
+              <textarea name="deskripsi" class="form-control" placeholder="Deskripsi SEO" ng-model="form.seo_deskripsi"></textarea>
+            </div>  
+
+          
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Simpan</div>
+        <div class="panel-body">
+          
+            
+            <div class="input-group m-b">        
+                <strong>Gambar : </strong>      
+                <input type="file" name="file" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)"/>
+                <hr>              
+                <div class="col">
+                  <div class="inline bg-white wrapper-sm b-a">
+                    <div class="bg-light">
+                      <img ng-src="{{image_source}}" style="max-width: 100%" />                    
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-bookmark"></i></span>
+              <select name="kategori" class="form-control m-b" required="" ng-model="form.id_blog_kategori" ng-selected="true">
+                <option value="" ng-selected="true">--  Kategori --</option>
+                <option ng-repeat="key in kategori" value="{{key.id}}" >{{key.judul}}</option>                
+              </select>
+            </div>
+            <div class="input-group m-b">
+              <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+              <tags-input ng-model="form.tag" placeholder="Masukan Tag" add-on-comma="true"></tags-input>              
+            </div>
+            <div class="checkbox">
+              <label class="i-checks">
+                <input type="checkbox" value="1" ng-model="form.status">
+                <i></i>
+                Terbitkan
+              </label>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <button class="btn btn-success btn-addon btn-md" type="submit" id="submit"><i class="glyphicon glyphicon-floppy-saved" id="load"></i>Simpan</button>
+            <button class="btn btn-warning btn-addon btn-md" ui-sref="app.blog.semua_blog">Batal</button>         
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

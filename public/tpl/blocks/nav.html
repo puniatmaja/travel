@@ -1,0 +1,190 @@
+<!-- list -->
+<ul class="nav">  
+
+  <li ui-sref-active="active">
+    <a ui-sref="app.dashboard" class="auto">            
+      <i class="fa fa-globe icon text-primary-dker"></i>
+      <span class="font-bold" translate="aside.nav.DASHBOARD">Dashboard</span>
+    </a>
+  </li>
+  <li class="line dk hidden-folded"></li>
+  <li ng-class="{active:$state.includes('app.blog')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-pencil" style="color: #F8C10D"></i>
+      <span translate="aside.nav.components.blog.BLOG">Blog</span>
+    </a>
+    <ul class="nav nav-sub dk">
+                  
+      <li ui-sref-active="active">
+        <a ui-sref="app.blog.blog_baru">
+          <span translate="aside.nav.components.blog.BLOG_BARU">Buat Blog</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.blog.semua_blog">
+          <span translate="aside.nav.components.blog.SEMUA_BLOG">Blog</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.blog.kategori">
+          <span translate="aside.nav.components.blog.KATEGORI_BLOG">Kategori Blog</span>
+        </a>
+      </li>
+        
+    </ul>
+  </li>
+  <li class="line dk hidden-folded"></li>
+  <li ng-class="{active:$state.includes('app.produk')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+     <i class="glyphicon glyphicon-briefcase text-info-dker" style="color: #27C24C"></i>
+      <span translate="aside.nav.components.produk.PRODUK">Produk</span>
+    </a>
+    <ul class="nav nav-sub dk">
+            
+      <li ui-sref-active="active">
+        <a ui-sref="app.produk.produk_baru">
+          <span translate="aside.nav.components.produk.PRODUK_BARU">Produk Baru</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.produk.semua_produk">
+          <span translate="aside.nav.components.produk.SEMUA_PRODUK">Semua Produk</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.produk.kategori">
+          <span translate="aside.nav.components.produk.KATEGORI_PRODUK">Kategori Produk</span>
+        </a>
+      </li>
+        
+    </ul>
+  </li>
+  <li class="line dk hidden-folded"></li>
+  <li ng-class="{active:$state.includes('app.page')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="icon icon-layers text-info-dker" style="color: #377EF0"></i>
+      <span translate="aside.nav.components.page.PAGE">Page</span>
+    </a>
+    <ul class="nav nav-sub dk">
+            
+      <li ui-sref-active="active">
+        <a ui-sref="app.page.semua_page">
+          <span translate="aside.nav.components.page.SEMUA_PAGE">Semua Page</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.page.page_baru">
+          <span translate="aside.nav.components.page.PAGE_BARU">Page Baru</span>
+        </a>
+      </li>
+
+    </ul>
+  </li>
+  <li class="line dk hidden-folded"></li>
+  <li ng-class="{active:$state.includes('app.galeri')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="fa fa-image text-info-dker" style="color: #FF751C"></i>
+      <span translate="aside.nav.components.galeri.GALERI">Galeri</span>
+    </a>
+    <ul class="nav nav-sub dk">
+                  
+      <li ui-sref-active="active">
+        <a ui-sref="app.galeri.semua_galeri">
+          <span translate="aside.nav.components.galeri.SEMUA_GALERI">Galeri</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.galeri.kategori">
+          <span translate="aside.nav.components.galeri.KATEGORI_GALERI">Kategori Galeri</span>
+        </a>
+      </li>              
+
+    </ul>
+  </li>
+  <li class="line dk hidden-folded"></li>
+  <li ng-class="{active:$state.includes('app.setting')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="icon icon-settings" style="color: #3A3F51"></i>
+      <span translate="aside.nav.components.setting.SETTING">Setting</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.admin">
+          <span translate="aside.nav.components.setting.ADMINISTRATOR">Administrator</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.sosial_media">
+          <span translate="aside.nav.components.setting.SOSIAL_MEDIA">Sosial Media</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.profile_website">
+          <span translate="aside.nav.components.setting.PROFILE_WEBSITE">Profile Website</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.menu">
+          <span translate="aside.nav.components.setting.MENU">Menu Utama</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.menu_tambahan">
+          <span translate="aside.nav.components.setting.MENU_TAMBAHAN">Menu Tambahan</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.footer">
+          <span translate="aside.nav.components.setting.FOOTER">Footer</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.special_offer">
+          <span translate="aside.nav.components.setting.SPECIAL_OFFER">Special Offer</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.home_setting">
+          <span translate="aside.nav.components.setting.HOME_SETTING">Home Setting</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.semua_slider">
+          <span translate="aside.nav.components.setting.SLIDER">Slider</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.kontak">
+          <span translate="aside.nav.components.setting.KONTAK">Kontak</span>
+        </a>
+      </li>      
+      <li ui-sref-active="active">
+        <a ui-sref="app.setting.tag">
+          <span translate="aside.nav.components.setting.TAG">Tag</span>
+        </a>
+      </li>      
+
+    </ul>
+  </li>  
+</ul>
+<!-- / list -->

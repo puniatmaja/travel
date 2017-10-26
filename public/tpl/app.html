@@ -1,0 +1,29 @@
+  <!-- navbar -->
+  <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+  <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+  </div>
+  <!-- / navbar -->
+
+  <!-- menu -->
+  <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
+  </div>
+  <!-- / menu -->
+
+  <!-- content -->
+  <div class="app-content">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
+    <div class="app-content-body fade-in-up" ui-view></div>
+  </div>
+  <!-- /content -->
+
+  <!-- footer -->
+  <div class="menu_mobile app-footer wrapper b-t bg-success" style="position: fixed;padding: 0 20px;padding-bottom: 5px">
+    <button ui-sref="app.dashboard" class="btn btn-rounded btn-lg btn-icon btn-default" style="bottom: 2px;position: absolute;width: 100px;height: 50px;"><i class="fa fa-home text-success"></i></button>    
+    <button ui-sref="app.blog.blog_baru" class="btn btn-danger btn-addon btn-md pull-right" style="margin-top: 6px;"><i class="fa fa-pencil-square-o"></i>Buat Blog</button>
+  </div>
+
+  <!-- / footer -->
+
+  <!-- <div data-ng-include=" 'tpl/blocks/settings.html' " class="settings panel panel-default">
+  </div> -->
