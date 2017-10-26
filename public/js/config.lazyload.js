@@ -115,7 +115,15 @@ angular.module('app')
                       'vendor/jquery/tag/tag.js',
                       'vendor/jquery/tag/tag.css'
                   ]
-              },              
+              },
+              {
+                  name: 'tags',
+                  files: [
+                      'vendor/tag/bootstrap-tagsinput.css',
+                      'vendor/tag/bootstrap-tagsinput.min.js',
+                      'vendor/tag/bootstrap-tagsinput-angular.min.js'
+                  ]
+              },
               {
                   name: 'vr.directives.slider',
                   files: [
