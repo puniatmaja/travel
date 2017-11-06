@@ -23,7 +23,6 @@ class FrontController extends Controller
      */
     public function index()
     {               
-        return \Request::ip();
         $data['main'] = $this->main(); 
         $data['home'] = DB::table('home_setting')->orderBy('posisi','ASC')->where('status','=',1)->get();
         foreach ($data['home'] as $row) {

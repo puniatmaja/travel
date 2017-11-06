@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
+@if(trim($main['profile_website']->google_webmaster) != '')  
+  <?= $main['profile_website']->google_webmaster; ?>  
+@endif
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#38AA4B" />
@@ -12,9 +16,6 @@
   <link rel="stylesheet" type="text/css" href="{{asset('front')}}/slider.css">
   <link rel="stylesheet" type="text/css" href="{{asset('front')}}/nav.css">
   <link rel="stylesheet" type="text/css" href="{{asset('front')}}/theme.css">
-@if(trim($main['profile_website']->google_webmaster) != '')  
-  <?= $main['profile_website']->google_webmaster; ?>  
-@endif
 @if(trim($main['profile_website']->google_analytics) != '')  
   <?= $main['profile_website']->google_analytics; ?>  
 @endif
@@ -25,6 +26,7 @@
     body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
   </style>
 @yield('script')
+</head>
 <body>
 <!-- Navbar -->
   <nav class="w3-top w3-black">
