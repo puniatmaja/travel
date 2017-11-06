@@ -46,7 +46,7 @@
   <meta name="twitter:description" content="<?= substr(strip_tags($main['profile_website']->deskripsi), 0,300) ?>" />
 @endif
 @if(trim($main['profile_website']->seo_judul) != '')
-  <meta name="twitter:title" content="{$main['profile_website']->seo_judul}}" />
+  <meta name="twitter:title" content="{{$main['profile_website']->seo_judul}}" />
 @else
   <meta name="twitter:title" content="{{$main['profile_website']->judul}}" />
 @endif
