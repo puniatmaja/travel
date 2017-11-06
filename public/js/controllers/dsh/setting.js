@@ -853,7 +853,7 @@ app.controller('Menu', ['$scope','$http','toaster','$modal','$cookieStore','$sta
   $scope.bookings.judul = 'booking';
 
   $scope.home.link = baseurl;
-  $scope.blogs.link = baseurl+'blog.html';
+  $scope.blogs.link = baseurl+'blog/';
   $scope.kontaks.link = baseurl+'contact.html';
   $scope.bookings.link = baseurl+'booking.html';
 
@@ -1033,7 +1033,7 @@ app.controller('MenuTambahan', ['$scope','$http','toaster','$modal','$cookieStor
     
   $scope.blog =[];
   $scope.blog.judul = 'blog';
-  $scope.blog.link = baseurl+'blog.html'; 
+  $scope.blog.link = baseurl+'blog/'; 
 
   $scope.sitemap =[];
   $scope.sitemap.judul = 'sitemap';

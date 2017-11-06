@@ -20,7 +20,7 @@ Route::get('link/{slug}', 'FrontController@single_product');
 Route::get('category/all', 'FrontController@list_product');
 Route::get('category', 'FrontController@list_product');
 Route::get('category/{slug}', 'FrontController@list_product');
-Route::get('blog.html', 'FrontController@list_blog');
+Route::get('blog', 'FrontController@list_blog');
 Route::get('blog/{slug}', 'FrontController@single_blog');
 Route::get('blog/category/{slug}', 'FrontController@list_blog');
 Route::get('tag/{slug}', 'FrontController@list_tag');

@@ -110,6 +110,7 @@ class FrontController extends Controller
                             ->where('product.slug','=',$param)
                             ->where('product.status','=',1)
                             ->first();            
+            if (!empty($data['single'])) {
             $data['tag'] = DB::table('all_tag')                                                
                             ->join('tag','all_tag.id_tag','=','tag.id')            
                             ->select('tag.judul','tag.slug')
@@ -119,7 +120,8 @@ class FrontController extends Controller
                             ->where('id_product','=',$data['single']->id)
                             ->select('judul','gambar')
                             ->get();
-            $data['related']= DB::table('product')->select('judul','gambar','slug')->where('id_kategori','=',$data['single']->id_cat)->where('id','!=',$data['single']->id)->where('status','=',1)->take(3)->orderBy('id','DESC')->get();            
+            $data['related']= DB::table('product')->select('judul','gambar','slug')->where('id_kategori','=',$data['single']->id_cat)->where('id','!=',$data['single']->id)->where('status','=',1)->take(3)->orderBy('id','DESC')->get();
+            }
             return view('front.single_product')->with($data);
         }
     }
@@ -130,18 +132,22 @@ class FrontController extends Controller
         }else{
             $data['main'] = $this->main(); 
             $data['sidebar'] = $this->sidebar();
+            
             $data['single'] = DB::table('blog')
                             ->join('blog_kategori','blog.id_blog_kategori','=','blog_kategori.id')
                             ->select('blog_kategori.id as id_cat','blog.id','blog.judul','blog.gambar','blog.deskripsi','blog_kategori.judul as judul_cat','blog.seo_judul','blog.seo_kata_kunci','blog.seo_deskripsi','blog.slug','blog_kategori.slug as slug_cat')
                             ->where('blog.slug','=',$param)
                             ->where('blog.status','=',1)
-                            ->first();            
+                            ->first();
+            if (!empty($data['single'])) {
+              
             $data['tag'] = DB::table('all_tag')                                                
                             ->join('tag','all_tag.id_tag','=','tag.id')            
                             ->select('tag.judul','tag.slug')
                             ->where('all_tag.id_blog','=',$data['single']->id)
                             ->get();            
             $data['related']= DB::table('blog')->select('judul','gambar','slug')->where('id_blog_kategori','=',$data['single']->id_cat)->where('id','!=',$data['single']->id)->where('status','=',1)->take(3)->orderBy('id','DESC')->get();
+            }  
             return view('front.single_blog')->with($data);
         }
     }   
@@ -229,7 +235,7 @@ class FrontController extends Controller
                             // ->where('blog.status','=',1)
                             ->orderBy('all_tag.id','DESC')
                             ->select('product.judul as judul_product','product.gambar as gambar_product','product.slug as slug_product','product.deskripsi as deskripsi_product','blog.judul as judul_blog','blog.gambar as gambar_blog','blog.slug as slug_blog','blog.deskripsi as deskripsi_blog')
-                            ->paginate(8);                                         
+                            ->paginate(8);                                                     
             return view('front.list_tag')->with($data);
         }
     }

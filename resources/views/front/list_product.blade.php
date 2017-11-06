@@ -1,6 +1,6 @@
 @extends('front.layout')
 @section('meta')
-
+@if(!empty($seo))
 @if(trim($seo->seo_judul) != '')
 @if($list->currentPage() == 1)  
   <title>{{$seo->judul}} - {{$seo->seo_judul}}</title>  
@@ -63,11 +63,69 @@
 @else
   <meta name="twitter:image" content="{{asset('gambar').'/'.$main['profile_website']->logo}}" />
 @endif
+@else
+
+@if(trim($main['profile_website']->seo_judul) != '')
+  <title>{{$main['profile_website']->seo_judul}}</title>
+@else
+  <title>{{$main['profile_website']->judul}}</title>
+@endif
+@if(trim($main['profile_website']->seo_deskripsi) != '')
+  <meta name="description" content="<?= substr(strip_tags($main['profile_website']->seo_deskripsi), 0,300) ?>">
+@else
+  <meta name="description" content="<?= substr(strip_tags($main['profile_website']->deskripsi), 0,300) ?>">
+@endif
+@if(trim($main['profile_website']->seo_kata_kunci) != '')
+  <meta name="keywords" content="{{$main['profile_website']->seo_kata_kunci}}">
+@else
+  <meta name="keywords" content="{{$main['profile_website']->judul}}">
+@endif
+  <meta name="author" content="{{$main['profile_website']->judul}}">
+
+  <meta property="og:type"               content="article" />
+@if(trim($main['profile_website']->seo_judul) != '')
+  <meta property="og:title"              content="{{$main['profile_website']->seo_judul}}" />
+@else
+  <meta property="og:title"              content="{{$main['profile_website']->judul}}" />
+@endif
+@if(trim($main['profile_website']->seo_deskripsi) != '')
+  <meta property="og:description"        content="<?= substr(strip_tags($main['profile_website']->seo_deskripsi), 0,300) ?>" />
+@else
+  <meta property="og:description"        content="<?= substr(strip_tags($main['profile_website']->deskripsi), 0,300) ?>" />
+@endif
+@if(trim($main['profile_website']->logo) != '')
+  <meta property="og:image"              content="{{asset('gambar').'/'.$main['profile_website']->logo}}" />
+@else
+  <meta property="og:image"              content="{{asset('gambar').'/'.$main['profile_website']->gambar}}" />
+@endif
+  <meta property="og:image:width" content="500" />
+  <meta property="og:image:height" content="450" />
+  <meta property="og:site_name" content="{{$main['profile_website']->judul}}" />
+  <meta property="og:url" content="{{Request::fullUrl()}}"/>
+
+  <meta name="twitter:card" content="summary" />
+@if(trim($main['profile_website']->seo_deskripsi) != '')
+  <meta name="twitter:description" content="<?= substr(strip_tags($main['profile_website']->seo_deskripsi), 0,300) ?>" />
+@else
+  <meta name="twitter:description" content="<?= substr(strip_tags($main['profile_website']->deskripsi), 0,300) ?>" />
+@endif
+@if(trim($main['profile_website']->seo_judul) != '')
+  <meta name="twitter:title" content="{{$main['profile_website']->seo_judul}}" />
+@else
+  <meta name="twitter:title" content="{{$main['profile_website']->judul}}" />
+@endif
+@if(trim($main['profile_website']->logo) != '')
+  <meta name="twitter:image" content="{{asset('gambar').'/'.$main['profile_website']->logo}}" />
+@else
+  <meta name="twitter:image" content="{{asset('gambar').'/'.$main['profile_website']->gambar}}" />
+@endif
+@endif
 
 @endsection
 @section('script')
 @endsection
 @section('content')
+@if(!empty($single))
 <!-- Grid -->
 <div class="w3-row " style="max-width:1200px;margin-top: 46px;margin:0 auto">
   <div class="w3-container w3-center w3-padding" style="margin-top: 50px"></div>
@@ -120,4 +178,30 @@
 @include('front.inc.sidebar')
   <!-- END GRID -->
 </div>
+@else
+<!-- Grid -->
+<div class="w3-row " style="max-width:1200px;margin-top: 46px;margin:0 auto">
+  <div class="w3-container w3-center w3-padding" style="margin-top: 50px"></div>
+  <!-- Blog entries -->
+  <div class="w3-col l8 s12">
+    
+    <!-- Blog entry -->
+    <div class="w3-container w3-white ">
+      
+      <div class="w3-left-align">
+        <h1>Error 404</h1>
+        <h2>Page Not Found!!</h2>
+        <form method="get" action="{{url('search')}}">
+          <input type="text"  name="search" placeholder="Search.." style="width: 100%;border: 3px solid #e0e0e0;padding: 10px;">
+        </form>
+      </div>
+    </div>
+    <hr>
+    
+    <!-- END BLOG ENTRIES -->
+  </div> 
+  @include('front.inc.sidebar')
+  <!-- END GRID -->
+</div>
+@endif
 @endsection
