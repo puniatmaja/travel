@@ -125,7 +125,7 @@
 @section('script')
 @endsection
 @section('content')
-@if(!empty($single))
+@if(!empty($seo))
 <!-- Grid -->
 <div class="w3-row " style="max-width:1200px;margin-top: 46px;margin:0 auto">
   <div class="w3-container w3-center w3-padding" style="margin-top: 50px"></div>
