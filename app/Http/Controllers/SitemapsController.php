@@ -16,7 +16,7 @@ class SitemapsController extends Controller
         Sitemap::addTag(url('gallery.html'), '', 'daily', '1.0');
         Sitemap::addTag(url('contact.html'), '', 'daily', '1.0');
         Sitemap::addTag(url('booking.html'), '', 'daily', '1.0');
-        Sitemap::addTag(url('blog.html'), '', 'daily', '1.0');
+        Sitemap::addTag(url('blog/'), '', 'daily', '1.0');
         Sitemap::addTag(url('category/all'), '', 'daily', '1.0');
         Sitemap::addTag(url('category'), '', 'daily', '1.0');                
 

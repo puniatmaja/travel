@@ -31,7 +31,7 @@ class adminController extends Controller
     
     public function index()
     {
-    	
+        
         return view('admin.index');
     }
     public function angular()
@@ -79,47 +79,49 @@ class adminController extends Controller
           $finisslug = $slug;
         }            
         $id = blog::create(array_merge($request->all(), ['slug' => strtolower($finisslug).'.html']))->id;        
-        // -----------------------------     
+        // -----------------------------             
         if (empty($post['tag'])) {              
-        }else{
-            foreach ($post['tag'] as $tags) {
-                $t = explode(',', $tags['text']);                
-                foreach ($t as $key) {
-                    $tag_baru = str_replace('-',' ',trim($key));
-                    $tag_find = DB::table('tag')->where('judul', $tag_baru)->get();
-                    if (count($tag_find) == 0) {                                            
-                        $slug = str_replace(' ','-',trim($key));                 
-                        $get_count = DB::table('tag')->where('judul', $tag_baru)->get();   
-                        $tc = count($get_count);    
-                        if ($tc > 0 ) {     
-                            $slugs = $slug.'-'.$tc;
-                            $slug_count = DB::table('tag')->where('judul', $tag_baru)->get();                          
-                            $sc = count($slug_count);
-                            if ($sc > 0) {
-                                $tag_slug = $slugs.'-'.$sc;
-                            }else{
-                                $tag_slug = $slug.'-'.$tc;
-                            }
+        }else{            
+            $t = explode(',', $post['tag']);                
+            foreach ($t as $key) {
+                $tag_baru = str_replace('-',' ',trim($key));                
+                $tag_find = DB::table('tag')->where('judul', $tag_baru)->get();
+                if (count($tag_find) == 0) {                                            
+                    $slug = str_replace(' ','-',trim($key));                 
+                    $get_count = DB::table('tag')->where('judul', $tag_baru)->get();   
+                    $tc = count($get_count);    
+                    if ($tc > 0 ) {     
+                        $slugs = $slug.'-'.$tc;
+                        $slug_count = DB::table('tag')->where('judul', $tag_baru)->get();                          
+                        $sc = count($slug_count);
+                        if ($sc > 0) {
+                            $tag_slug = $slugs.'-'.$sc;
+                        }else{
+                            $tag_slug = $slug.'-'.$tc;
                         }
-                        else{$tag_slug = $slug;}
-                        $data_tag = array('judul' => $tag_baru,
-                                            'slug' => strtolower($tag_slug).'.html');
-                        $tags = tag::create($data_tag);                  
-                        $data_tag = array('id_tag' =>$tags->id,
-                                            'id_blog' => $id);
+                    }
+                    else{$tag_slug = $slug;}
+                    $data_tag = array('judul' => $tag_baru,
+                                        'slug' => strtolower($tag_slug).'.html');
+                    $tags = tag::create($data_tag);                  
+                    $data_tag = array('id_tag' =>$tags->id,
+                                        'id_blog' => $id);
+                    if ($tag_baru != '') {
                         if (all_tag::where('id_tag','=',$tags->id)->where('id_blog' ,'=', $id)->get()->count() == 0) { 
                             all_tag::create($data_tag);                 
                         }
-                    }else{
-                        $id_tag = $tag_find[0]->id;
-                        $data_tag = array('id_tag' => $id_tag,
-                                            'id_blog' => $id);
+                    }
+                }else{
+                    $id_tag = $tag_find[0]->id;
+                    $data_tag = array('id_tag' => $id_tag,
+                                        'id_blog' => $id);
+                    if ($tag_baru != '') {
                         if (all_tag::where('id_tag','=',$id_tag)->where('id_blog' ,'=', $id)->get()->count() == 0) {
                             all_tag::create($data_tag);         
                         }        
-                    } 
-                }
-            }        
+                    }
+                } 
+            }            
         }   
     }
     public function blog_rubah($id='')
@@ -162,8 +164,8 @@ class adminController extends Controller
         // -----------------------------                
         if (empty($post['tag'])) {              
         }else{
-            foreach ($post['tag'] as $tags) {
-                $t = explode(',', $tags['text']);                
+            
+                $t = explode(',', $post['tag']);                
                 foreach ($t as $key) {
                     $tag_baru = str_replace('-',' ',trim($key));
                     $tag_find = DB::table('tag')->where('judul', $tag_baru)->get();
@@ -187,20 +189,24 @@ class adminController extends Controller
                         $tags = tag::create($data_tag);                  
                         $data_tag = array('id_tag' =>$tags->id,
                                             'id_blog' => $id);
-                        if (all_tag::where('id_tag','=',$tags->id)->where('id_blog' ,'=', $id)->get()->count() == 0 ) { 
-                            all_tag::create($data_tag);      
+                        if ($tag_baru != '') {
+                            if (all_tag::where('id_tag','=',$tags->id)->where('id_blog' ,'=', $id)->get()->count() == 0 ) { 
+                                all_tag::create($data_tag);      
+                            }
                         }
                     }else{
                         $id_tag = $tag_find[0]->id;
                         $data_tag = array('id_tag' => $id_tag,
                                             'id_blog' => $id);
-                        if (all_tag::where('id_tag','=',$id_tag)->where('id_blog' ,'=', $id)->get()->count() == 0) {
-                            all_tag::create($data_tag); 
+                        if ($tag_baru != '') {
+                            if (all_tag::where('id_tag','=',$id_tag)->where('id_blog' ,'=', $id)->get()->count() == 0) {
+                                all_tag::create($data_tag); 
+                            }
                         }
                         
                     } 
                 }
-            } 
+            
         }
 
     }
@@ -214,8 +220,8 @@ class adminController extends Controller
             ->join('tag', 'tag.id', '=', 'all_tag.id_tag')
             ->select('tag.judul as text')
             ->where('all_tag.id_blog', '=', $id)
-            ->get();
-            return $data;
+            ->lists('text');                        
+            return implode(',',$data);
     }
     public function blog_kategori_update(Request $request,$id)
     {
@@ -323,44 +329,48 @@ class adminController extends Controller
             // -----------------------------                
             if (empty($post['tag'])) {              
             }else{
-                foreach ($post['tag'] as $tags) {                
-                    $t = explode(',', $tags['text']);                
-                    foreach ($t as $key) {
-                        $tag_baru = str_replace('-',' ',trim($key));
-                        $tag_find = DB::table('tag')->where('judul', $tag_baru)->get();
-                        if (count($tag_find) == 0) {                                            
-                            $slug = str_replace(' ','-',trim($key));                 
-                            $get_count = DB::table('tag')->where('judul', $tag_baru)->get();   
-                            $tc = count($get_count);    
-                            if ($tc > 0 ) {     
-                                $slugs = $slug.'-'.$tc;
-                                $slug_count = DB::table('tag')->where('judul', $tag_baru)->get();                          
-                                $sc = count($slug_count);
-                                if ($sc > 0) {
-                                    $tag_slug = $slugs.'-'.$sc;
-                                }else{
-                                    $tag_slug = $slug.'-'.$tc;
-                                }
+                            
+                $t = explode(',', $post['tag']);                
+                foreach ($t as $key) {
+                    $tag_baru = str_replace('-',' ',trim($key));
+                    $tag_find = DB::table('tag')->where('judul', $tag_baru)->get();
+                    if (count($tag_find) == 0) {                                            
+                        $slug = str_replace(' ','-',trim($key));                 
+                        $get_count = DB::table('tag')->where('judul', $tag_baru)->get();   
+                        $tc = count($get_count);    
+                        if ($tc > 0 ) {     
+                            $slugs = $slug.'-'.$tc;
+                            $slug_count = DB::table('tag')->where('judul', $tag_baru)->get();                          
+                            $sc = count($slug_count);
+                            if ($sc > 0) {
+                                $tag_slug = $slugs.'-'.$sc;
+                            }else{
+                                $tag_slug = $slug.'-'.$tc;
                             }
-                            else{$tag_slug = $slug;}
-                            $data_tag = array('judul' => $tag_baru,
-                                                'slug' => strtolower($tag_slug).'.html');
-                            $tags = tag::create($data_tag);                  
-                            $data_tag = array('id_tag' =>$tags->id,
-                                                'id_product' => $post['id']);
+                        }
+                        else{$tag_slug = $slug;}
+                        $data_tag = array('judul' => $tag_baru,
+                                            'slug' => strtolower($tag_slug).'.html');
+                        $tags = tag::create($data_tag);                  
+                        $data_tag = array('id_tag' =>$tags->id,
+                                            'id_product' => $post['id']);
+                        if ($tag_baru != '') {
                             if (all_tag::where('id_tag','=',$tags->id)->where('id_product' ,'=', $post['id'])->get()->count() == 0) { 
                                 all_tag::create($data_tag);       
                             }
-                        }else{
-                            $id_tag = $tag_find[0]->id;
-                            $data_tag = array('id_tag' => $id_tag,
-                                                'id_product' => $post['id']);
+                        }
+                    }else{
+                        $id_tag = $tag_find[0]->id;
+                        $data_tag = array('id_tag' => $id_tag,
+                                            'id_product' => $post['id']);
+                        if ($tag_baru != '') {
                             if (all_tag::where('id_tag','=',$id_tag)->where('id_product' ,'=', $post['id'])->get()->count() == 0) {
                                 all_tag::create($data_tag);                 
                             }
-                        } 
-                    }
+                        }
+                    } 
                 }
+            
             }
         }
     }
@@ -435,45 +445,48 @@ class adminController extends Controller
         // -----------------------------                
         if (empty($post['tag'])) {              
         }else{
-            foreach ($post['tag'] as $tags) { 
-                $t = explode(',', $tags['text']);                
-                foreach ($t as $key){
-                    $tag_baru = str_replace('-',' ',trim($key));
-                    $tag_find = DB::table('tag')->where('judul', $tag_baru)->get();
-                    if (count($tag_find) == 0) {                                            
-                        $slug = str_replace(' ','-',trim($key));                 
-                        $get_count = DB::table('tag')->where('judul', $tag_baru)->get();   
-                        $tc = count($get_count);    
-                        if ($tc > 0 ) {     
-                            $slugs = $slug.'-'.$tc;
-                            $slug_count = DB::table('tag')->where('judul', $tag_baru)->get();                          
-                            $sc = count($slug_count);
-                            if ($sc > 0) {
-                                $tag_slug = $slugs.'-'.$sc;
-                            }else{
-                                $tag_slug = $slug.'-'.$tc;
-                            }
+             
+            $t = explode(',', $post['tag']);                
+            foreach ($t as $key){
+                $tag_baru = str_replace('-',' ',trim($key));
+                $tag_find = DB::table('tag')->where('judul', $tag_baru)->get();
+                if (count($tag_find) == 0) {                                            
+                    $slug = str_replace(' ','-',trim($key));                 
+                    $get_count = DB::table('tag')->where('judul', $tag_baru)->get();   
+                    $tc = count($get_count);    
+                    if ($tc > 0 ) {     
+                        $slugs = $slug.'-'.$tc;
+                        $slug_count = DB::table('tag')->where('judul', $tag_baru)->get();                          
+                        $sc = count($slug_count);
+                        if ($sc > 0) {
+                            $tag_slug = $slugs.'-'.$sc;
+                        }else{
+                            $tag_slug = $slug.'-'.$tc;
                         }
-                        else{$tag_slug = $slug;}
-                        $data_tag = array('judul' => $tag_baru,
-                                            'slug' => strtolower($tag_slug).'.html');
-                        $tags = tag::create($data_tag);              
-                        $data_tag = array('id_tag' =>$tags->id,
-                                            'id_product' => $id);                        
+                    }
+                    else{$tag_slug = $slug;}
+                    $data_tag = array('judul' => $tag_baru,
+                                        'slug' => strtolower($tag_slug).'.html');
+                    $tags = tag::create($data_tag);              
+                    $data_tag = array('id_tag' =>$tags->id,
+                                        'id_product' => $id);                        
+                    if ($tag_baru != '') {
                         if (all_tag::where('id_tag','=',$tags->id)->where('id_product' ,'=', $id)->get()->count() == 0) { 
                             all_tag::create($data_tag);                 
                         }
-                    }else{
-                        $id_tag = $tag_find[0]->id;
-                        $data_tag = array('id_tag' => $id_tag,
-                                            'id_product' => $id);
+                    }
+                }else{
+                    $id_tag = $tag_find[0]->id;
+                    $data_tag = array('id_tag' => $id_tag,
+                                        'id_product' => $id);
+                    if ($tag_baru != '') {
                         if (all_tag::where('id_tag','=',$id_tag)->where('id_product' ,'=', $id)->get()->count() == 0) {
                             all_tag::create($data_tag); 
                         }
-                        
                     }
-                } 
+                }
             } 
+            
         }
 
     }
@@ -487,8 +500,8 @@ class adminController extends Controller
             ->join('tag', 'tag.id', '=', 'all_tag.id_tag')
             ->select('tag.judul as text')
             ->where('all_tag.id_product', '=', $id)
-            ->get();
-            return $data;
+            ->lists('text');                        
+            return implode(',',$data);
     }
     public function kategori_update(Request $request,$id)
     {
@@ -525,7 +538,9 @@ class adminController extends Controller
         $data = DB::table('product')        
             ->leftjoin('kategori', 'product.id_kategori', '=', 'kategori.id')            
             ->orderBy('product.id', 'desc')
-            ->select('product.id','product.slug','product.judul','product.status','product.gambar','kategori.judul as kategori')->get();  
+            ->select('product.id','product.slug','product.judul','product.status','product.gambar','kategori.judul as kategori')
+            ->get();  
+
         return $data;
     }
     public function hapus_kategori($id)

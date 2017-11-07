@@ -102,7 +102,7 @@ app.controller('Produk', ['$scope','FileUploader','$http','$location','toaster',
   
 }]);
 
-app.controller('ProdukRubah', ['$scope','$http','$location','$stateParams','toaster','FileUploader','$cookieStore','$state', function($scope,$http,$location,$stateParams,toaster,FileUploader,$cookieStore,$state) {    
+app.controller('ProdukRubah', ['$scope','$http','$location','$stateParams','toaster','FileUploader','$cookieStore','$state','$timeout', function($scope,$http,$location,$stateParams,toaster,FileUploader,$cookieStore,$state,$timeout) {    
     if (!$cookieStore.get('auth')) {
       $state.go('access.signin');   
     }
