@@ -178,8 +178,12 @@ app.controller('Semua_Galeri', ['$scope', 'FileUploader','toaster','$http','$coo
   }
   $scope.path = baseurl+'galeri/'; 
   $http.get(baseurl+'admin/all_galeri_kategori').success(function(data) {    
-    $scope.kategori=data;          
-
+    $scope.kategori=data;              
+    $timeout(function(){
+      $scope.form = {
+        kategori:data[0].id
+      }
+    }, 100); 
   });
 
   var uploader = $scope.uploader = new FileUploader({        

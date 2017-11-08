@@ -13,8 +13,7 @@
             <div class="col-md-4">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-bookmark"></i></span>
-                <select name="kategori" class="form-control m-b" required="" ng-model="form.kategori">                  
-                  <option value="" ng-selected="true">-- Pilih Kategori --</option>}                  
+                <select name="kategori" class="form-control m-b" required="" ng-model="form.kategori">
                   <option ng-repeat="row in kategori" value="{{row.id}}" >{{row.judul}}</option>
                 </select>
               </div>
