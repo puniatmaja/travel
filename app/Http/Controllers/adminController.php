@@ -265,6 +265,7 @@ class adminController extends Controller
     public function hapus_blog($id)
     {
         blog::find($id)->delete();
+        all_tag::where('id_blog', $id)->delete();
     }
     // ------------
     public function kategori()
@@ -550,6 +551,7 @@ class adminController extends Controller
     public function hapus_product($id)
     {
         product::find($id)->delete();
+        all_tag::where('id_product', $id)->delete();
     }
 
     // -----------------------page

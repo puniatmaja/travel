@@ -94,43 +94,10 @@
 @endforeach
       
     </div>
-    <!-- <div class="w3-center w3-padding-32">
-      <div class="w3-bar">
-        <?php var_dump($list->perPage()); ?>
-        <br>
-        <?php var_dump($list->count()); ?>
-        <br>
-        <?php var_dump($list->currentPage()); ?>
-        <br>
-        <?php var_dump($list->firstItem()); ?>
-        <br>
-        <?php var_dump($list->hasMorePages()); ?>
-        <br>
-        <?php var_dump($list->lastItem()); ?>
-        <br>
-        <?php var_dump($list->lastPage()); ?>
-        <br>
-        <?php var_dump($list->nextPageUrl()); ?>
-        <br>
-        <?php var_dump($list->perPage()); ?>
-        <br>
-        <?php var_dump($list->previousPageUrl()); ?>
-        <br>
-        <?php var_dump($list->total() ); ?>
-        <br>
-        
-        <?php echo $list->render(); ?>
-        {{$list->previousPageUrl()}}
-        <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-        <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-        <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-        <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-        <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-        <a href="{{'?page='.$list->lastPage()}}" class="w3-bar-item w3-button w3-hover-black">»</a>
-      </div>
-    </div>   -->
-    <hr>
-    <!-- END BLOG ENTRIES -->
+    
+    <div class="w3-center w3-padding-32">  
+      <?php echo $list->render(); ?>                
+    </div>
   </div>
   
 @include('front.inc.sidebar')

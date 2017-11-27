@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Booking</title>
+		<title>Message</title>
 	</head>
 	
 	<body style=" color: #000;margin: 0 auto;width: 100%;overflow-x: hidden;font-family: sans-serif;">
@@ -10,7 +10,7 @@
 	<h3>Hello {{$request['name']}},</h3>
 	<br>
 	<br>
-	First of all we would like to thank you for choosing . Following to your reservation here we are pleased to confirm your booking as follow details:
+	Thanks for your message:
 	<br>
 	<br>
 

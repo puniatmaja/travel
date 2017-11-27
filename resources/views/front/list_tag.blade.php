@@ -48,7 +48,7 @@
   <meta property="og:url" content="{{Request::fullUrl()}}"/>
 
   <meta name="twitter:card" content="summary" />
-@if(trim($main['profile_website']->logo) != '')
+@if(trim($seo->seo_deskripsi) != '')
   <meta name="twitter:description" content="{{$seo->judul}} - <?= substr(strip_tags($seo->seo_deskripsi), 0,300) ?>" />
 @else
   <meta name="twitter:description" content="{{$seo->judul}} - <?= substr(strip_tags($main['profile_website']->deskripsi), 0,300) ?>" />
@@ -56,7 +56,7 @@
 @if(trim($seo->seo_judul) != '')
   <meta name="twitter:title" content="{{$seo->seo_judul}}" />
 @else
-  <meta name="twitter:title" content="{{$main['profile_website']->judul}}" />
+  <meta name="twitter:title" content="{{$seo->judul}}" />
 @endif
 @if(trim($main['profile_website']->logo) != '')
   <meta name="twitter:image" content="{{asset('gambar').'/'.$main['profile_website']->logo}}" />

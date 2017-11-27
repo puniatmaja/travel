@@ -3,7 +3,10 @@
 /* Controllers */
   // signin controller
 app.controller('SigninFormController', ['$scope', '$http', '$state','$cookieStore', function($scope, $http, $state,$cookieStore) {
-    $cookieStore.remove('auth');
+    // $cookieStore.remove('auth');
+    if ($cookieStore.get('auth')) {
+      $state.go('app.dashboard');
+    }
     $scope.user = {};
     $scope.authError = null;
     $scope.success = null;

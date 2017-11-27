@@ -3,15 +3,15 @@
 @if(!empty($seo))
 @if(trim($seo->seo_judul) != '')
 @if($list->currentPage() == 1)  
-  <title>{{$seo->judul}} - {{$seo->seo_judul}}</title>  
+  <title>{{$seo->seo_judul}}</title>  
 @else
-  <title>{{$seo->judul}} - {{$seo->seo_judul}} - Page{{$list->currentPage()}}</title>  
+  <title>{{$seo->seo_judul}} - Page{{$list->currentPage()}}</title>  
 @endif  
 @else
 @if($list->currentPage() == 1)  
-  <title>{{$seo->judul}} - {{$seo->judul}}</title>  
+  <title>{{$seo->judul}}</title>  
 @else
-  <title>{{$seo->judul}} - {{$seo->judul}} - Page{{$list->currentPage()}}</title>  
+  <title>{{$seo->judul}} - Page{{$list->currentPage()}}</title>  
 @endif  
 @endif
 @if(trim($seo->seo_deskripsi) != '')
