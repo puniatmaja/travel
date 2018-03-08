@@ -27,7 +27,7 @@
   </style>
 @yield('script')
 </head>
-<body>
+<body oncontextmenu='return false;' onkeydown='return false;' onmousedown='return false;'>
 <!-- Navbar -->
   <nav class="w3-top w3-black">
     
@@ -154,11 +154,17 @@
 @include('front.footer.map')
 @endif                
 @endforeach
-      </div>  
-
+      </div>        
     </div>
   </footer>
   <div class="w3-light-grey w3-center w3-padding-small" style="z-index: 99;position: relative;">Powered by <a href="https://www.tayatha.com/" title="tayatha" target="_blank" class="w3-hover-opacity w3-text-white">tayatha</a></div>  
-
+  <script type='text/javascript'>
+  //<![CDATA[
+  document.addEventListener('copy', function (e){
+      e.preventDefault();
+    e.clipboardData.setData("text/plain", "Jangan Copas Gan :) "+window.location.href+"");
+  })
+  //]]>
+  </script>
 </body>
 </html>
